@@ -1,0 +1,29 @@
+.node {
+  width: 22px;
+  height: 22px;
+  background-color: transparent; /* Deep, dark blue */
+  border: 0.5px dashed #254D70; /* High-saturation yellow border */
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+.start-node {
+  background-color: #00ffae; /* Neon green-cyan */
+}
+
+.finish-node {
+  background-color: #ff0059; /* Neon pink-red */
+}
+
+.path-node {
+  background-color: #ffe600; /* Vivid yellow */
+  border: 0.5px solid #ffb700;
+}
+
+.shortest-path-node {
+  background-color: #00c3ff; /* Bright cyan-blue */
+}
+
+.wall-node {
+  background-color: #954C2E; /* Deep, saturated purple */
+}

@@ -1,0 +1,18 @@
+.grid {
+  margin: 5px 0px 5px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: fixed;
+  bottom: 0;
+
+}
+
+.grid-row {
+  display: flex;
+  flex-direction: row;
+}
+
+
+
