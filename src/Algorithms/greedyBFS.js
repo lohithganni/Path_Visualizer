@@ -1,17 +1,26 @@
-export default function dikstras(grid, startNode, endNode) {
+import { getShortestPath } from "./getShortestPath";
+
+export function greedyBFS(grid, startNode, endNode) {
   const visitedNodes = [];
   const n = grid.length;
   const m = grid[0].length;
 
   const dist = new Array(n);
+  const abs_dist = new Array(n);
   const visited = new Array(n);
   const prev = new Array(n);
   for (let i = 0; i < n; i++) {
     dist[i] = new Array(m).fill(Infinity);
+    abs_dist[i] = new Array(m);
     visited[i] = new Array(m).fill(false);
     prev[i] = new Array(m).fill(null);
   }
-
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < m; j++) {
+      abs_dist[i][j] = abs_dist[i][j] =
+        Math.abs(i - endNode.row) + Math.abs(j - endNode.col); // Manhattan distace for 4 directional grid
+    }
+  }
   dist[startNode.row][startNode.col] = 0;
   const Heap = [];
   Heap.push(startNode);
@@ -24,7 +33,7 @@ export default function dikstras(grid, startNode, endNode) {
   ];
 
   while (Heap.length > 0) {
-    Heap.sort((a, b) => dist[b.row][b.col] - dist[a.row][a.col]);
+    Heap.sort((a, b) => abs_dist[b.row][b.col] - abs_dist[a.row][a.col]);
     const node = Heap.pop();
     const { row, col } = node;
 
@@ -32,7 +41,8 @@ export default function dikstras(grid, startNode, endNode) {
     visited[row][col] = true;
     visitedNodes.push(node);
 
-    if (row === endNode.row && col === endNode.col) { // visited the end node
+    if (row === endNode.row && col === endNode.col) {
+      // visited the end node
       break;
     }
 
@@ -45,7 +55,7 @@ export default function dikstras(grid, startNode, endNode) {
         newCol >= 0 &&
         newCol < m &&
         grid[newRow][newCol].weight !== Infinity &&
-        !visited[newRow][newCol] 
+        !visited[newRow][newCol]
       ) {
         const alt = dist[row][col] + grid[newRow][newCol].weight; // assuming all edges have weight 1
         if (alt < dist[newRow][newCol]) {
@@ -58,19 +68,6 @@ export default function dikstras(grid, startNode, endNode) {
   }
   const shortestPath = getShortestPath(prev, endNode);
 
-  return {visitedNodes,shortestPath};
+  return { visitedNodes, shortestPath };
 }
 
-// Reconstruct the shortest path
-function getShortestPath(prev, endNode) {
-  const path = [];
-  let node = endNode;
-  while (node) {
-    path.unshift(node); // Add node to the front
-    node = prev[node.row][node.col];
-  }
-  return path;
-}
-
-// grid -> 2d array of nodes
-// startNode & endNode -> nodes

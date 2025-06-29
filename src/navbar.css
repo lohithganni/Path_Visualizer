@@ -29,10 +29,21 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.nav-btn:hover{
+.nav-btn:hover {
   box-shadow: 0 4px 12px rgba(95, 201, 243, 0.2);
 }
-.nav-btn.visualizing_algorithm{ /* Button with both class names*/
-    background-color: red;
-    box-shadow: none;
+
+.nav-btn.visualizing_algorithm { /* Button with both class names */
+  background-color: red;
+  box-shadow: none;
+}
+
+.nav-select {
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  background: #232946;
+  color: #f8f8f2;
+  margin-right: 12px;
 }

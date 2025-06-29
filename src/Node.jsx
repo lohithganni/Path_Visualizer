@@ -7,7 +7,7 @@ export default class Node extends Component {
   }
 
   render() {
-    const { isStart, isFinish, weight, isPath, isShortestPath, handleWeightChange } = this.props;
+    const { isStart, isFinish, weight, isPath, isShortestPath, handleMouseEnter, handleMouseDown, handleMouseUp } = this.props;
 
     
     const appendClassName = isShortestPath
@@ -22,7 +22,9 @@ export default class Node extends Component {
     return (
       <div
         className={`node ` + (weight===Infinity? `wall-node` : `${appendClassName}`)}
-        onClick={() => handleWeightChange(this.props.row, this.props.col)}
+        onMouseEnter={() => handleMouseEnter(this.props.row, this.props.col)}
+        onMouseDown={() => handleMouseDown(this.props.row, this.props.col)}
+        onMouseUp={() => handleMouseUp(this.props.row, this.props.col)}
       ></div>
     );
   }

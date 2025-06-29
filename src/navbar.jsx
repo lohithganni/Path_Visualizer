@@ -8,21 +8,39 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const { visualizeDikstras, clearPath, resetGrid, action } = this.props;
+    const {
+      visualize,
+      clearPath,
+      resetGrid,
+      action,
+      algorithm,
+      onAlgorithmChange,
+      generateRandomMaze
+    } = this.props;
     return (
       <>
         <nav className="navbar">
           <ul className="navbar-list">
             <li>
+              <select
+                value={algorithm}
+                onChange={(e) => onAlgorithmChange(e.target.value)}
+                className="nav-select"
+              >
+                <option value="DIJKSTRA">Dijkstra</option>
+                <option value="ASTAR">A*</option>
+                <option value="greedyBFS">Greedy BFS</option>
+                <option value="BFS">BFS</option>
+              </select>
+            </li>
+            <li>
               <button
-                onClick={() => visualizeDikstras()}
+                onClick={() => visualize()}
                 className={`nav-btn${
-                  action === "visualizing_algorithm"
-                    ? " visualizing_algorithm"
-                    : ""
+                  action === "visualizing_algorithm" ? " visualizing_algorithm" : ""
                 }`}
               >
-                visualize dikstras
+                visualize {algorithm.toLowerCase()}
               </button>
             </li>
             <li>
@@ -36,12 +54,9 @@ export default class Navbar extends Component {
               </button>
             </li>
             <li>
-              <select name="cars" id="cars">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select>
+              <button className="nav-btn" onClick={() => generateRandomMaze()}>
+                Generate Random Maze
+              </button>
             </li>
           </ul>
         </nav>
@@ -49,3 +64,5 @@ export default class Navbar extends Component {
     );
   }
 }
+
+
